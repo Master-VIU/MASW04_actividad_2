@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('booking', function (Blueprint $table) {
-            $table->id('id_resenya');
-            $table->string('puntuacion', 50);
-            $table->string('opinion', 250);
-            $table->date('fecha');
-            /*$table->foreign('id_cliente')
-            ->references('id_cliente')->on('usuario_cliente')
-            ->onDelete('cascade');   
-            $table->foreign('id_producto')
-            ->references('id_producto')->on('product')
+        Schema::create('category', function (Blueprint $table) {
+            $table->id('id_category');
+            $table->string('name_category', 250)->nullable();
+           /* $table->bigIncrements('parent_category_id');
+            $table->foreign('parent_category_id')
+            ->references('parent_category_id')->on('category')
             ->onDelete('cascade');   */
             $table->timestamps();
             $table->softDeletes();
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking');
+        Schema::dropIfExists('category');
     }
 };

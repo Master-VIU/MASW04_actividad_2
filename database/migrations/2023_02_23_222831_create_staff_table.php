@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
-            $table->id('id_categoria');
-            $table->string('nombre_categoria', 250)->nullable();
-           /* $table->bigIncrements('id_categoria_padre');
-            $table->foreign('id_categoria_padre')
-            ->references('id_categoria_padre')->on('category')
-            ->onDelete('cascade');   */
+        Schema::create('staff', function (Blueprint $table) {
+            $table->string('dni', 9)->primary();
+            $table->string('cif', 9)->nullable(false);
+            $table->enum('role', ['technical', 'adviser'])->nullable(false);
+            $table->foreign('id_user')
+            ->references('id_user')->on('user_worker')
+            ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('staff');
     }
 };

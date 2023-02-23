@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer_address', function (Blueprint $table) {     
-            /*$table->primary(['id_cliente', 'id_direccion']);      
-            $table->foreign('id_cliente')
-            ->references('id_cliente')->on('usuario_cliente')
-            ->onDelete('cascade');   
-            $table->foreign('id_direccion')
-            ->references('id_direccion')->on('address')
-            ->onDelete('cascade');*/
+        Schema::create('trolley', function (Blueprint $table) {
+            $table->id('trolley_id');
+            $table->double('total_cost', 10, 2)->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_address');
+        Schema::dropIfExists('trolley');
     }
 };

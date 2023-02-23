@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
-            $table->string('dni', 9)->primary();
-            $table->string('cif', 9);
-            $table->enum('rol', ['tecnico', 'asesor']);
-            /*$table->foreign('id_usuario')
-            ->references('id_usuario')->on('usuario_trabajador')
-            ->onDelete('cascade');  */ 
+        Schema::create('customer_address', function (Blueprint $table) {
+            /*$table->primary(['customer_id', 'id address']);      
+            $table->foreign('customer_id')
+            ->references('customer_id')->on('user_client')
+            ->onDelete('cascade');   
+            $table->foreign('id address')
+            ->references('id address')->on('address')
+            ->onDelete('cascade');*/
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('customer_address');
     }
 };
