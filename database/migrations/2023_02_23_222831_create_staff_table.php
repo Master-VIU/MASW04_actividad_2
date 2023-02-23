@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('dni', 9)->primary();
             $table->string('cif', 9)->nullable(false);
             $table->enum('role', ['technical', 'adviser'])->nullable(false);
-            $table->foreign('id_user')
+            $table->foreignId('id_user')
             ->references('id_user')->on('user_worker')
-            ->onDelete('cascade');
+            ->onDelete("restrict")
+            ->onUpdate("cascade");
             $table->timestamps();
             $table->softDeletes();
         });
