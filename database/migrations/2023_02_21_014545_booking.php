@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('puntuacion', 50);
             $table->string('opinion', 250);
             $table->date('fecha');
+            /*$table->foreign('id_cliente')
+            ->references('id_cliente')->on('usuario_cliente')
+            ->onDelete('cascade');   
+            $table->foreign('id_producto')
+            ->references('id_producto')->on('product')
+            ->onDelete('cascade');   */
             $table->timestamps();
             $table->softDeletes();
         });

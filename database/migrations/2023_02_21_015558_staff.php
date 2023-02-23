@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('staff', function (Blueprint $table) {
-            $table->id('id_usuario');
-            $table->string('dni', 9);
+            $table->string('dni', 9)->primary();
             $table->string('cif', 9);
-          //  $table->rol('rol');
+            $table->enum('rol', ['tecnico', 'asesor']);
+            /*$table->foreign('id_usuario')
+            ->references('id_usuario')->on('usuario_trabajador')
+            ->onDelete('cascade');  */ 
             $table->timestamps();
             $table->softDeletes();
         });

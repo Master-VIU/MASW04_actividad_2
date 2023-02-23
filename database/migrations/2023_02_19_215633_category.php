@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->id('id_categoria');
-            $table->string('nombre_categoria', 250);
+            $table->string('nombre_categoria', 250)->nullable();
+            //$table->bigIncrements('id_categoria_padre');
+            $table->foreign('id_categoria_padre')
+            ->references('id_categoria_padre')->on('category')
+            ->onDelete('cascade');   
             $table->timestamps();
             $table->softDeletes();
         });
