@@ -14,16 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('booking', function (Blueprint $table) {
-            $table->id('id_review');
+            $table->id('review_id');
             $table->string('punctuation', 50)->nullable(false);
             $table->string('opinion', 250)->nullable(false);
             $table->date('date')->nullable(false);
             /*$table->foreign('customer_id')
-            ->references('customer_id')->on('usuario_cliente')
-            ->onDelete('cascade');   
+            ->references('customer_id')->on('customer_user')
+            ->onDelete("restrict")
+            ->onUpdate("cascade");    
             $table->foreign('product_id')
             ->references('product_id')->on('product')
-            ->onDelete('cascade');   */
+            ->onDelete("restrict")
+            ->onUpdate("cascade");    */
             $table->timestamps();
             $table->softDeletes();
         });

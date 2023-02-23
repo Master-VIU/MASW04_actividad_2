@@ -17,10 +17,12 @@ return new class extends Migration
             /*$table->primary(['customer_id', 'id address']);      
             $table->foreign('customer_id')
             ->references('customer_id')->on('user_client')
-            ->onDelete('cascade');   
+            ->onDelete("cascade")
+            ->onUpdate("cascade");   
             $table->foreign('id address')
             ->references('id address')->on('address')
-            ->onDelete('cascade');*/
+            ->onDelete('set null')
+            ->onUpdate("cascade");  */
             $table->timestamps();
             $table->softDeletes();
         });

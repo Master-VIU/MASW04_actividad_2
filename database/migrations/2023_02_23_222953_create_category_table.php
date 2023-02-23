@@ -14,12 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category', function (Blueprint $table) {
-            $table->id('id_category');
+            $table->id('category_id');
             $table->string('name_category', 250)->nullable();
-           /* $table->bigIncrements('parent_category_id');
-            $table->foreign('parent_category_id')
+           /* $table->foreignId('parent_category_id')
             ->references('parent_category_id')->on('category')
-            ->onDelete('cascade');   */
+            ->onDelete('cascade'); */
             $table->timestamps();
             $table->softDeletes();
         });
