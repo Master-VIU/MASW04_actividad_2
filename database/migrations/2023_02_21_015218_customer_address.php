@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer_address', function (Blueprint $table) {           
+        Schema::create('customer_address', function (Blueprint $table) {     
+            /*$table->primary(['id_cliente', 'id_direccion']);      
+            $table->foreign('id_cliente')
+            ->references('id_cliente')->on('usuario_cliente')
+            ->onDelete('cascade');   
+            $table->foreign('id_direccion')
+            ->references('id_direccion')->on('address')
+            ->onDelete('cascade');*/
             $table->timestamps();
             $table->softDeletes();
         });
