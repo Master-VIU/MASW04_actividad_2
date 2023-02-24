@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date')->nullable(false);
             $table->foreignId('user_client_id')->references('user_client_id')->on('user_client')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('product_id')->references('product_id')->on('products')
+            $table->foreignId('product_id')->references('product_id')->on('product')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
