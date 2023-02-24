@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_worker', function (Blueprint $table) {
-            $table->id('id_user');
+            $table->id('id_user_worker');
+            $table->enum('role', ['technician', 'consultant'])->nullable(false);
+            $table->foreignId('username')->references('username')->on('user');
             $table->timestamps();
             $table->softDeletes();
         });

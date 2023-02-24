@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_client', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_user_client');
+            $table->foreignId('id_shopping_cart')->references('id_shopping_cart')->on('shopping_cart');
+            $table->foreignId('username')->references('username')->on('user');
             $table->timestamps();
         });
     }
