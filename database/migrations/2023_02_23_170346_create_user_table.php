@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user', function (Blueprint $table) {
-            $table->id('username');
-            $table->string('password', 50)->nullable(false);
+            $table->id('user_id');
+            $table->string('username')->nullable(false)->unique();
+            $table->string('password', 100)->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });

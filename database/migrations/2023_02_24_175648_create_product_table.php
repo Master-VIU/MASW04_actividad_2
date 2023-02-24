@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('stock')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
+            $table->unique(['category_id', 'name']);
         });
 
         // find way to check that price is always above zero point zero

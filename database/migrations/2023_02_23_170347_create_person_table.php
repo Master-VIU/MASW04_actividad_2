@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('surname', 50)->nullable(false);
             $table->string('email', 100)->nullable(false);
             $table->string('telephone', 50)->nullable(false);
-            $table->foreignId('username')->references('username')->on('user')
+            $table->foreignId('user_id')->references('user_id')->on('user')
                 ->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
             $table->softDeletes();
