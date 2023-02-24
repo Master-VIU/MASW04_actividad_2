@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_worker', function (Blueprint $table) {
-            $table->id('user_worker_id');
-            $table->enum('role', ['technician', 'consultant'])->nullable(false);
-            $table->foreignId('username')->references('username')->on('user')
-                ->onUpdate('cascade')->onDelete('cascade');
+        Schema::create('category', function (Blueprint $table) {
+            $table->id('category_id');
+            $table->string('name_category', 250)->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('category', function (Blueprint $table) {
+            $table->foreignId('parent_category_id')->references('category_id')
+                ->on('category')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_worker');
+        Schema::dropIfExists('category');
     }
 };

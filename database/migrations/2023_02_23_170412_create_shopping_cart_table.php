@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shopping_cart', function (Blueprint $table) {
-            $table->id('id_shopping_cart');
+            $table->id('shopping_cart_id');
             $table->decimal('total_cost')->default(0)->nullable(false);
             $table->timestamps();
             $table->softDeletes();
