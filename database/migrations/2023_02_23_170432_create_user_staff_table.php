@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_worker', function (Blueprint $table) {
-            $table->id('user_worker_id');
+        Schema::create('user_staff', function (Blueprint $table) {
+            $table->id('user_staff_id');
             $table->enum('role', ['technician', 'consultant'])->nullable(false);
             $table->foreignId('username')->references('username')->on('user')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_worker');
+        Schema::dropIfExists('user_staff');
     }
 };
