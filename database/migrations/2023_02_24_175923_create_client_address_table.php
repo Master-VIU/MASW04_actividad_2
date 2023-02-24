@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shopping_cart_product', function (Blueprint $table) {
-            $table->id('shopping_cart_product_id');
-            $table->foreignId('shopping_cart_id')->references('shopping_cart_id')->on('shopping_cart')
+        Schema::create('client_address', function (Blueprint $table) {
+            $table->id('client_address_id');
+            $table->foreignId('client_id')->references('user_client_id')->on('user_client')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('product_id')->references('product_id')->on('product')
+            $table->foreignId('address_id')->references('address_id')->on('address')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('quantity')->nullable(false);
-            $table->unique(['shopping_cart_id', 'product_id']);
+            $table->unique(['client_id', 'address_id']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shopping_cart_product');
+        Schema::dropIfExists('client_address');
     }
 };
