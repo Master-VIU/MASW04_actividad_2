@@ -17,18 +17,18 @@ class PersonTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0,10);
-            foreach ($arrays as $valor) {
-              DB::table('person')->insert([	            
-                  'dni' => Str::random(12),
-                  'name' => Str::random(50),
-                  'surname' => Str::random(50),
-                  'email' => Str::random(50).'@email.com',
-                  'telephone' => Str::random(50),
-                  'user_id' => 1,
-                  'created_at' => Date::now(),
-                  'updated_at' => Date::now()
-              ]);
+        $arrays = range(0, 10);
+        foreach ($arrays as $valor) {
+            DB::table('person')->insert([
+                'dni' => Str::random(12),
+                'name' => Str::random(50),
+                'surname' => Str::random(50),
+                'email' => Str::random(50) . '@email.com',
+                'telephone' => Str::random(50),
+                'user_id' => 1,
+                'created_at' => Date::now(),
+                'updated_at' => Date::now()
+            ]);
         }
     }
 }
