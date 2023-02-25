@@ -16,13 +16,13 @@ class ShoppingCartTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0,10);
-            foreach ($arrays as $valor) {
-                DB::table('shopping_cart')->insert([
-                    'total_cost' => rand(1, 2000),
-                    'created_at' => Date::now(),
-                    'updated_at' => Date::now()
-                ]);
-            }
+        $arrays = range(0, 10);
+        foreach ($arrays as $valor) {
+            DB::table('shopping_cart')->insert([
+                'total_cost' => rand(1, 2000),
+                'created_at' => Date::now(),
+                'updated_at' => Date::now()
+            ]);
+        }
     }
 }
