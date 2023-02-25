@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'prueba' => '1234'
         ];
 
-        foreach($user_passwords as $user => $password) {
+        foreach ($user_passwords as $user => $password) {
             DB::table('user')->insert([
                 'username' => $user,
                 'password' => Hash::make($password),
