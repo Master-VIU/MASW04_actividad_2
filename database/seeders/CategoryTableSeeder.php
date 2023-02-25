@@ -17,14 +17,14 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0,10);
-            foreach ($arrays as $valor) {
-                DB::table('category')->insert([
-                    'name_category' => Str::random(100),
-                    'parent_category_id' => 1,
-                    'created_at' => Date::now(),
-                    'updated_at' => Date::now()      
-                ]);
-            }
+        $arrays = range(0, 10);
+        foreach ($arrays as $valor) {
+            DB::table('category')->insert([
+                'name_category' => Str::random(100),
+                'parent_category_id' => 1,
+                'created_at' => Date::now(),
+                'updated_at' => Date::now()
+            ]);
+        }
     }
 }
