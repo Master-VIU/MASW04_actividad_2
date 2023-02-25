@@ -18,8 +18,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0, 10);
-        foreach ($arrays as $valor) {
+
+        $user_passwords =  range(0, 10);
+        /*[
+            'admin' => 'admin',
+            'prueba' => '1234'
+        ];*/
+
+        foreach ($user_passwords as $user) {
             DB::table('user')->insert([
                 'username' => Str::random(50),
                 'password' => Hash::make('password'),
