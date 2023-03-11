@@ -21,7 +21,7 @@ class RatingTableSeeder extends Seeder
         foreach ($arrays as $valor) {
             DB::table('rating')->insert([
                 'rate' => rand(1, 5),
-                'opinion' => Str::random(250),
+                'opinion' => 'Un buen producto',
                 'date' => Date::now(),
                 'user_client_id' => 1,
                 'product_id' => 1,

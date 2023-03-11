@@ -17,14 +17,40 @@ class UserStaffTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0, 10);
-        foreach ($arrays as $valor) {
+        DB::table('user_staff')->insert([
+            'role' => 'technician',
+            'user_id' => 1,
+            'created_at' => Date::now(),
+            'updated_at' => Date::now()
+        ]);
+        DB::table('user_staff')->insert([
+            'role' => 'consultant',
+            'user_id' => 2,
+            'created_at' => Date::now(),
+            'updated_at' => Date::now()
+        ]);
+        DB::table('user_staff')->insert([
+            'role' => 'technician',
+            'user_id' => 4,
+            'created_at' => Date::now(),
+            'updated_at' => Date::now()
+        ]);
+        // use ids from 5 to 45
+        $ids = range(5, 45);
+        foreach ($ids as $id) {
             DB::table('user_staff')->insert([
-                'role' => 'technician',
-                'user_id' => 1,
+                'role' => $this->getRandomRole(),
+                'user_id' => $id,
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);
         }
+    }
+
+    private function getRandomRole(): string
+    {
+        $roles = array('technician', 'consultant');
+        $roleIndex = rand(0, 1);
+        return $roles[$roleIndex];
     }
 }

@@ -18,13 +18,12 @@ class CardTableSeeder extends Seeder
      */
     public function run()
     {
-        
         $arrays = range(0,10);
-            foreach ($arrays as $valor) {                
+            foreach ($arrays as $valor) {
                 DB::table('card')->insert([
-                    'card_number' => Str::random(50),    
+                    'card_number' => rand(11111, 99999).rand(11111, 99999).rand(11111, 99999).rand(11111, 99999),
                     'type' => 'credit',
-                    'cvv' => rand(1, 999),
+                    'cvv' => rand(111, 999),
                     'expiration_date' => Carbon::createFromDate(2023)->addYears(rand(1,5))->format('Y-m-d'),
                     'user_client_id' => 1,
                     'created_at' => Date::now(),

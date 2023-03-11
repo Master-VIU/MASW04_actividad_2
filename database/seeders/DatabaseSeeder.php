@@ -15,21 +15,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CategoryTableSeeder::class,
-            ShoppingCartTableSeeder::class,
             UserTableSeeder::class,
-            PersonTableSeeder::class,
-            AddressTableSeeder::class,
+            ShoppingCartTableSeeder::class,
             UserClientTableSeeder::class,
-            CardTableSeeder::class,
-            ProductTableSeeder::class,
-            RatingTableSeeder::class,
-            ClientAddressTableSeeder::class,
-            ProductImageTableSeeder::class,
-            OrderTableSeeder::class,
             UserStaffTableSeeder::class,
+            PersonTableSeeder::class,
+            CategoryTableSeeder::class,
+            ProductTableSeeder::class,
             RepairmentTableSeeder::class,
-            ShoppingCartProductTableSeeder::class
+            AddressTableSeeder::class,
+            CardTableSeeder::class,
+            RatingTableSeeder::class,
+            ShoppingCartProductTableSeeder::class,
+            ClientAddressTableSeeder::class,
+            OrderTableSeeder::class,
+            ProductImageTableSeeder::class,
         ]);
     }
 }

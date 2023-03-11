@@ -17,11 +17,23 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0, 10);
-        foreach ($arrays as $valor) {
+        $categories = array(
+            'Keyboard & Mouse' => '',
+            'Keyboard' => 'Keyboard & Mouse',
+            'Mouse' => 'Keyboard & Mouse',
+            'Computer' => '',
+            'Laptop' => 'Computer',
+            'PC' => 'Computer',
+            'Accessories' => ''
+        );
+        foreach ($categories as $category => $parent) {
+            $parent = DB::table('category')
+                ->where('name_category', $parent)
+                ->pluck('category_id');
+            $parentId = (sizeof($parent) > 0) ? $parent[0] : null;
             DB::table('category')->insert([
-                'name_category' => Str::random(100),
-                'parent_category_id' => 1,
+                'name_category' => $category,
+                'parent_category_id' => $parentId,
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);

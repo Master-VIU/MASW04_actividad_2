@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('user_client', function (Blueprint $table) {
             $table->id('user_client_id');
-            $table->foreignId('shopping_cart_id')->references('shopping_cart_id')
+            $table->foreignId('shopping_cart_id')->unique()->references('shopping_cart_id')
                 ->on('shopping_cart')->onUpdate('cascade')->onDelete('cascade');;
-            $table->foreignId('user_id')->references('user_id')->on('user')
+            $table->foreignId('user_id')->unique()->references('user_id')->on('user')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

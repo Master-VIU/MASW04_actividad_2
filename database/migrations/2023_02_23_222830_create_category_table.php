@@ -21,7 +21,7 @@ return new class extends Migration
         });
 
         Schema::table('category', function (Blueprint $table) {
-            $table->foreignId('parent_category_id')->references('category_id')
+            $table->foreignId('parent_category_id')->nullable(true)->references('category_id')
                 ->on('category')->onUpdate('cascade')->onDelete('cascade');
         });
     }

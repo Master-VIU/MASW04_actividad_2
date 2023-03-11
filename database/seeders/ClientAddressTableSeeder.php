@@ -16,10 +16,15 @@ class ClientAddressTableSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('client_address')->insert([
             'client_id' => 1,
             'address_id' => 1,
+            'created_at' => Date::now(),
+            'updated_at' => Date::now()
+        ]);
+        DB::table('client_address')->insert([
+            'client_id' => 1,
+            'address_id' => 2,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);

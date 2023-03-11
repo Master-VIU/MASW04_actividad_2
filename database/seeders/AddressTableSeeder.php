@@ -17,13 +17,13 @@ class AddressTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0, 10);
-        foreach ($arrays as $valor) {
+        $numbers = range(1, 41);
+        foreach ($numbers as $number) {
             DB::table('address')->insert([
-                'street' => Str::random(200),
-                'street_number' => rand(1, 999),
-                'city' => Str::random(100),
-                'postal_code' => rand(1, 999999),
+                'street' => 'Calle Barrio Sesamo',
+                'street_number' => $number,
+                'city' => 'Madrid',
+                'postal_code' => 12345,
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);

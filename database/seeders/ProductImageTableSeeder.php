@@ -21,7 +21,7 @@ class ProductImageTableSeeder extends Seeder
         foreach ($arrays as $valor) {
             DB::table('product_image')->insert([
                 'product_id' => 1,
-                'image_path' => Str::random(400),
+                'image_path' => '/images/'.$valor.'.png',
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);

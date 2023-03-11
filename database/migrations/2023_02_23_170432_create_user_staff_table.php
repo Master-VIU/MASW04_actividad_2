@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_staff', function (Blueprint $table) {
             $table->id('user_staff_id');
             $table->enum('role', ['technician', 'consultant'])->nullable(false);
-            $table->foreignId('user_id')->references('user_id')->on('user')
+            $table->foreignId('user_id')->unique()->references('user_id')->on('user')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

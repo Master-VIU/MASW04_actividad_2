@@ -16,14 +16,27 @@ class UserClientTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0, 10);
-        foreach ($arrays as $valor) {
+        $customIds = array(3);
+        $shoppingId = 41;
+        foreach ($customIds as $id) {
             DB::table('user_client')->insert([
-                'shopping_cart_id' => 1,//rand(1, 14)
-                'user_id' => 1, //rand(1, 14)
+                'shopping_cart_id' => $shoppingId,
+                'user_id' => $id,
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);
+        }
+        // use ids from 46 to 84
+        $ids = range(46, 84);
+        $shoppingId = 1;
+        foreach ($ids as $id) {
+            DB::table('user_client')->insert([
+                'shopping_cart_id' => $shoppingId,
+                'user_id' => $id,
+                'created_at' => Date::now(),
+                'updated_at' => Date::now()
+            ]);
+            $shoppingId++;
         }
     }
 }

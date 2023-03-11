@@ -17,15 +17,32 @@ class RepairmentTableSeeder extends Seeder
      */
     public function run()
     {
-        $arrays = range(0, 10);
-        foreach ($arrays as $valor) {
-            DB::table('repairment')->insert([
-                'description' => Str::random(250),
+        $repairments = array(
+            1 => array(
+                'description' => 'Repared a mouse without cable',
                 'request_date' => Date::now(),
                 'repairment_date' => Date::now(),
-                'price' => rand(1, 999),
+                'price' => 34.5,
                 'staff_id' => 1,
-                'client_id' => 1,
+                'client_id' => 1
+            ),
+            2 => array(
+                'description' => 'Repared a keyboard without cable',
+                'request_date' => Date::now(),
+                'repairment_date' => Date::now(),
+                'price' => 22.2,
+                'staff_id' => 1,
+                'client_id' => 1
+            ),
+        );
+        foreach ($repairments as $repairment) {
+            DB::table('repairment')->insert([
+                'description' => $repairment['description'],
+                'request_date' => $repairment['request_date'],
+                'repairment_date' => $repairment['repairment_date'],
+                'price' => $repairment['price'],
+                'staff_id' => $repairment['staff_id'],
+                'client_id' => $repairment['client_id'],
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);
