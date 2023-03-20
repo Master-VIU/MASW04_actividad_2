@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\tmp;
 
-use App\Models\Category;
+use App\Http\Controllers\Controller;
+use App\Models\tmp\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -50,7 +51,7 @@ class CategoryController extends Controller
     {
         try {
         $data = Category::findOrFail($id);
-            
+
         } catch (\Exception $th) {
             //throw $th;
         }

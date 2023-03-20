@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\tmp;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserClient extends Model
+class ShoppingCart extends Model
 {
     use HasFactory;
 
-
-    protected $table = "user_client";
-    protected $primaryKey = "user_client_id";
+    protected $table = "shopping_cart";
+    protected $primaryKey = "shopping_cart_id";
 
     protected $fillable = [
-        'user_client_id',
         'shopping_cart_id',
+        'total_cost',
     ];
 }
