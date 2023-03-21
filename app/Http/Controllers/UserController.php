@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ResultResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $users = User::all();
 
@@ -23,7 +24,6 @@ class UserController extends Controller
         $resultResponse->setStatus(ResultResponse::SUCCESS);
 
         return response()->json($resultResponse);
-
     }
 
     /**
@@ -32,17 +32,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $this->validateUser($request);
-
+        $validation = $request->validate([
+            'name' => 'required',
+            'password' => 'required|min:5',
+        ]);
+        return response()->json($validation);
         $resultResponse = new ResultResponse();
 
         try
         {
             $newUser = new User([
                 'username' => $request->get('username'),
-                'password' => $request->get('password')
+                'password' => Hash::make($request->get('password'))
             ]);
 
             $newUser->save();
@@ -62,35 +65,58 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(User $user)
+    public function show(int $id): \Illuminate\Http\JsonResponse
     {
-        //
-    }
+        $resultResponse = new ResultResponse();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
+        try
+        {
+            $user = User::findOrFail($id);
+
+            $resultResponse->setData($user);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e)
+        {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+        return response()->json($resultResponse);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, int $id): \Illuminate\Http\JsonResponse
     {
-        //
+        $this->validateUser($request);
+        $resultResponse = new ResultResponse();
+
+        try
+        {
+            $user = User::findOrFail($id);
+
+            $user->username = $request->get('username');
+            $user->password = Hash::make($request->get('password'));
+
+            $user->save();
+
+            $resultResponse->setData($user);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+
+        } catch (\Exception $e)
+        {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+
+        return response()->json($resultResponse);
     }
 
     /**
@@ -104,9 +130,9 @@ class UserController extends Controller
         //
     }
 
-    public function validateUser(Request $request)
+    public function validateUser(Request $request): array
     {
-        $request->validate([
+        return $request->validate([
             'name' => 'required',
             'password' => 'required|min:5',
         ]);
