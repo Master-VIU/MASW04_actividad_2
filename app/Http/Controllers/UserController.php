@@ -159,8 +159,4 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
-    public function validateUser(RequestValidateUser $request)
-    {
-        $request->validated();
-    }
 }
