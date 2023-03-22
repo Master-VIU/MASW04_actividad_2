@@ -9,4 +9,15 @@ class User extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "user_id";
+    /**
+     * The attributes that are mass assignablse.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'username',
+        'password',
+    ];
+
 }
