@@ -15,7 +15,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $users = User::all();
 
@@ -25,7 +25,6 @@ class UserController extends Controller
         $resultResponse->setStatus(ResultResponse::SUCCESS);
 
         return response()->json($resultResponse);
-
     }
 
     /**
@@ -34,9 +33,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(RequestValidateUser $request)
+    public function store(Request $request)
     {
-        $request->validated();
+        $this->validateUser($request);
 
         $resultResponse = new ResultResponse();
 
@@ -58,81 +57,38 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
-
-    public function show($userID)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
     {
+        //
+    }
 
-        $resultResponse = new ResultResponse();
-        try {
-            $user = User::findOrFail($userID);
-
-            $resultResponse->setData($user);
-            $resultResponse->setStatus(ResultResponse::SUCCESS);
-        } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
-            $resultResponse->setData($e->getMessage());
-
-        }
-        return response()->json($resultResponse);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(RequestValidateUser $request, $userID)
+    public function update(Request $request, User $user)
     {
-        $request->validated();
-
-        $resultResponse = new ResultResponse();
-
-        try {
-
-            $user = User::findOrFail($userID);
-            $user->username = $request->get('username');
-            $user->password = Hash::make($request->get('password'));
-            $user->save();
-
-
-            $resultResponse->setData($user);
-            $resultResponse->setStatus(ResultResponse::SUCCESS);
-        } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
-            $resultResponse->setData($e->getMessage());
-        }
-
-        return response()->json($resultResponse);
-    }
-
-
-
-
-    public function put(Request $request, $userID)
-    {
-       
-
-        $resultResponse = new ResultResponse();
-
-        try {
-
-            $user = User::findOrFail($userID);
-
-            $user->username = $request->get('username', $user->username);
-            $user->password = Hash::make($request->get('password', $user->password));
-            $user->save();
-
-
-            $resultResponse->setData($user);
-            $resultResponse->setStatus(ResultResponse::SUCCESS);
-        } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
-            $resultResponse->setData($e->getMessage());
-        }
-
-        return response()->json($resultResponse);
+        //
     }
 
     /**
@@ -159,4 +115,11 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
+    public function validateUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'password' => 'required|min:5',
+        ]);
+    }
 }
