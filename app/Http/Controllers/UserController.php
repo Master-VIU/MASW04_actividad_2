@@ -130,6 +130,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
+        }
 
         return response()->json($resultResponse);
     }
