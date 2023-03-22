@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestValidateUser;
 use App\Models\ResultResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -32,26 +34,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(RequestValidateUser $request)
     {
-        $this->validateUser($request);
+        $request->validated();
 
         $resultResponse = new ResultResponse();
 
-        try
-        {
+        try {
             $newUser = new User([
                 'username' => $request->get('username'),
-                'password' => $request->get('password')
+                'password' => Hash::make($request->get('password'))
             ]);
 
             $newUser->save();
 
             $resultResponse->setData($newUser);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::ERROR);
             $resultResponse->setData($e->getMessage());
         }
@@ -59,26 +58,22 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
+    public function show($userID)
     {
-        //
+
+        $resultResponse = new ResultResponse();
+        try {
+            $user = User::findOrFail($userID);
+
+            $resultResponse->setData($user);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setData($e->getMessage());
+
+        }
+        return response()->json($resultResponse);
     }
 
     /**
@@ -88,9 +83,56 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(RequestValidateUser $request, $userID)
     {
-        //
+        $request->validated();
+
+        $resultResponse = new ResultResponse();
+
+        try {
+
+            $user = User::findOrFail($userID);
+            $user->username = $request->get('username');
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
+
+
+            $resultResponse->setData($user);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+
+        return response()->json($resultResponse);
+    }
+
+
+
+
+    public function put(Request $request, $userID)
+    {
+       
+
+        $resultResponse = new ResultResponse();
+
+        try {
+
+            $user = User::findOrFail($userID);
+
+            $user->username = $request->get('username', $user->username);
+            $user->password = Hash::make($request->get('password', $user->password));
+            $user->save();
+
+
+            $resultResponse->setData($user);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+
+        return response()->json($resultResponse);
     }
 
     /**
@@ -99,16 +141,26 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($userID)
     {
-        //
+        $resultResponse = new ResultResponse();
+
+        try{
+
+            $user = User::findOrFail($userID);
+            $user->delete();
+
+            $resultResponse->setData($user);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        }catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+        return response()->json($resultResponse);
     }
 
-    public function validateUser(Request $request)
+    public function validateUser(RequestValidateUser $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'password' => 'required|min:5',
-        ]);
+        $request->validated();
     }
 }
