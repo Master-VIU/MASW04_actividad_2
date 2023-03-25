@@ -22,14 +22,14 @@ class DatabaseSeeder extends Seeder
             PersonTableSeeder::class,
             CategoryTableSeeder::class,
             ProductTableSeeder::class,
-            RepairmentTableSeeder::class,
-            AddressTableSeeder::class,
-            CardTableSeeder::class,
-            RatingTableSeeder::class,
-            ShoppingCartProductTableSeeder::class,
-            ClientAddressTableSeeder::class,
-            OrderTableSeeder::class,
-            ProductImageTableSeeder::class,
+            // RepairmentTableSeeder::class,
+             AddressTableSeeder::class,
+            // CardTableSeeder::class,
+            // RatingTableSeeder::class,
+            // ShoppingCartProductTableSeeder::class,
+            // ClientAddressTableSeeder::class,
+            // OrderTableSeeder::class,
+            // ProductImageTableSeeder::class,
         ]);
     }
 }
