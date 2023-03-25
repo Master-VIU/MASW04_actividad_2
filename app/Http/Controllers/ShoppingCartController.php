@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ResultResponse;
 use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,14 @@ class ShoppingCartController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $cars = ShoppingCart::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $resultResponse = new ResultResponse();
+
+        $resultResponse->setData($cars);
+        $resultResponse->setStatus(ResultResponse::SUCCESS);
+
+        return response()->json($resultResponse);
     }
 
     /**
@@ -35,7 +33,23 @@ class ShoppingCartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $resultResponse = new ResultResponse();
+
+        try {
+            $newCart = new ShoppingCart([
+                'total_cost' => $request->get('total_cost')
+            ]);
+
+            $newCart->save();
+
+            $resultResponse->setData($newCart);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::ERROR);
+            $resultResponse->setData($e->getMessage());
+        }
+
+        return response()->json($resultResponse);
     }
 
     /**
@@ -44,20 +58,20 @@ class ShoppingCartController extends Controller
      * @param  \App\Models\ShoppingCart  $shoppingCart
      * @return \Illuminate\Http\Response
      */
-    public function show(ShoppingCart $shoppingCart)
+    public function show($shoppingCartID)
     {
-        //
-    }
+        $resultResponse = new ResultResponse();
+        try {
+            $cart = ShoppingCart::findOrFail($shoppingCartID);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShoppingCart $shoppingCart)
-    {
-        //
+            $resultResponse->setData($cart);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setData($e->getMessage());
+
+        }
+        return response()->json($resultResponse);
     }
 
     /**
@@ -67,9 +81,25 @@ class ShoppingCartController extends Controller
      * @param  \App\Models\ShoppingCart  $shoppingCart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ShoppingCart $shoppingCart)
+    public function update(Request $request, $shoppingCartID)
     {
-        //
+        $resultResponse = new ResultResponse();
+
+        try {
+
+            $cart = ShoppingCart::findOrFail($shoppingCartID);
+            $cart->total_cost = $request->get('total_cost');
+            $cart->save();
+
+
+            $resultResponse->setData($cart);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        } catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+
+        return response()->json($resultResponse);
     }
 
     /**
@@ -78,8 +108,21 @@ class ShoppingCartController extends Controller
      * @param  \App\Models\ShoppingCart  $shoppingCart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShoppingCart $shoppingCart)
+    public function destroy($shoppingCartID)
     {
-        //
+        $resultResponse = new ResultResponse();
+
+        try{
+
+            $cart = ShoppingCart::findOrFail($shoppingCartID);
+            $cart->delete();
+
+            $resultResponse->setData($cart);
+            $resultResponse->setStatus(ResultResponse::SUCCESS);
+        }catch (\Exception $e) {
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
+            $resultResponse->setData($e->getMessage());
+        }
+        return response()->json($resultResponse);
     }
 }
