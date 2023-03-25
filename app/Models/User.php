@@ -9,7 +9,6 @@ class User extends Model
 {
     use HasFactory;
 
-
     protected $table = 'user';
     protected $primaryKey = "user_id";
     /**

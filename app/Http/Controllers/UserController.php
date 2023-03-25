@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestValidateUser;
+use App\Http\Requests\RequestValidateUserOnUpdate;
 use App\Models\ResultResponse;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a paginated listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $offset = $request->has('offset') ? $request->get('offset') : 0;
+
+        $users = User::select('*')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
@@ -31,13 +36,11 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param RequestValidateUser $request
+     * @return JsonResponse
      */
-    public function store(RequestValidateUser $request)
+    public function store(RequestValidateUser $request): JsonResponse
     {
-        $request->validated();
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -59,9 +62,8 @@ class UserController extends Controller
     }
 
 
-    public function show($userID)
+    public function show($userID): JsonResponse
     {
-
         $resultResponse = new ResultResponse();
         try {
             $user = User::findOrFail($userID);
@@ -69,7 +71,7 @@ class UserController extends Controller
             $resultResponse->setData($user);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
 
         }
@@ -79,14 +81,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateUserOnUpdate $request
+     * @param $userID
+     * @return JsonResponse
      */
-    public function update(RequestValidateUser $request, $userID)
+    public function update(RequestValidateUserOnUpdate $request, $userID): JsonResponse
     {
-        $request->validated();
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -107,13 +107,8 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
-
-
-
-    public function put(Request $request, $userID)
+    public function put(Request $request, $userID): JsonResponse
     {
-       
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -138,8 +133,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param $userID
+     * @return JsonResponse
      */
     public function destroy($userID)
     {
@@ -152,7 +147,8 @@ class UserController extends Controller
 
             $resultResponse->setData($user);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
-        }catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
         }

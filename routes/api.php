@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::get('/', 'index');
-    Route::post('/', 'store');
     Route::post('/{id}', 'update');
+    Route::post('/', 'store');
     Route::put('/{id}', 'put');
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
@@ -72,7 +72,7 @@ Route::controller(ShoppingCartController::class)->prefix('cart')->group(function
 Route::controller(UserStaffController::class)->prefix('userstaff')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
-    Route::post('/{id}', 'update');    
+    Route::post('/{id}', 'update');
     Route::put('/{id}', 'put');
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
@@ -82,7 +82,7 @@ Route::controller(UserStaffController::class)->prefix('userstaff')->group(functi
 Route::controller(AddressController::class)->prefix('address')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
-    Route::post('/{id}', 'update');    
+    Route::post('/{id}', 'update');
     Route::put('/{id}', 'put');
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
