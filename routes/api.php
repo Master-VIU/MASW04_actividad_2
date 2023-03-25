@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserStaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +20,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::get('/', 'index');
@@ -44,6 +44,45 @@ Route::controller(ProductController::class)->prefix('product')->group(function (
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::post('/{id}', 'update');
+    Route::put('/{id}', 'put');
+    Route::get('/{id}', 'show');
+    Route::delete('/{id}', 'destroy');
+});
+
+
+Route::controller(PersonController::class)->prefix('person')->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::post('/{id}', 'update');
+    Route::put('/{id}', 'put');
+    Route::get('/{id}', 'show');
+    Route::delete('/{id}', 'destroy');
+});
+
+
+Route::controller(ShoppingCartController::class)->prefix('cart')->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::post('/{id}', 'update');
+    Route::get('/{id}', 'show');
+    Route::delete('/{id}', 'destroy');
+});
+
+
+Route::controller(UserStaffController::class)->prefix('userstaff')->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::post('/{id}', 'update');    
+    Route::put('/{id}', 'put');
+    Route::get('/{id}', 'show');
+    Route::delete('/{id}', 'destroy');
+});
+
+
+Route::controller(AddressController::class)->prefix('address')->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::post('/{id}', 'update');    
     Route::put('/{id}', 'put');
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
