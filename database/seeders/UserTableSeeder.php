@@ -106,7 +106,7 @@ class UserTableSeeder extends Seeder
         ];
 
         foreach ($user_passwords as $user => $password) {
-            DB::table('users')->insert([
+            DB::table('user')->insert([
                 'username' => $user,
                 'password' => Hash::make($password),
                 'created_at' => Date::now(),
