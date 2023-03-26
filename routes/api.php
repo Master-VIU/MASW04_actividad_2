@@ -85,7 +85,6 @@ Route::controller(UserStaffController::class)->prefix('staff')->group(function (
     Route::delete('/{id}', 'destroy');
 });
 
-/*
 Route::controller(AddressController::class)->prefix('address')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -94,4 +93,4 @@ Route::controller(AddressController::class)->prefix('address')->group(function (
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-*/
+

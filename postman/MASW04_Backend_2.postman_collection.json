@@ -1179,7 +1179,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\" :\"Tesat**w\"\r\n}",
+							"raw": "{\r\n    \"role\": \"technician\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1187,12 +1187,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/user/1",
+							"raw": "{{API}}/staff/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"user",
+								"staff",
 								"1"
 							]
 						}
@@ -1220,13 +1220,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/user/1",
+							"raw": "{{API}}/staff/44",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"user",
-								"1"
+								"staff",
+								"44"
 							]
 						}
 					},
@@ -1256,12 +1256,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/user/1",
+							"raw": "{{API}}/staff/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"user",
+								"staff",
 								"1"
 							]
 						}
@@ -1292,12 +1292,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/client?offset=0&limit=3",
+							"raw": "{{API}}/staff?offset=0&limit=3",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"client"
+								"staff"
 							],
 							"query": [
 								{
@@ -1326,7 +1326,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"technician\",\r\n    \"user_id\": \"1\"\r\n}",
+							"raw": "{\r\n    \"role\": \"tech=nician\",\r\n    \"user_id\": 55\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1341,6 +1341,172 @@
 							"path": [
 								"staff",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ADDRESS",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/address?offset=0&limit=3",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"address"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET SINGLE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/address/1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/address/1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\" : \"street\",\r\n    \"street_number\" : \"15\",\r\n    \"city\" : \"city\",\r\n    \"postal_code\" : \"102123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/address",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\" : \"street\",\r\n    \"street_number\" : \"15\",\r\n    \"city\" : \"city\",\r\n    \"postal_code\" : \"102123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/address/1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE FIELD",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\" : \"street\",\r\n    \"street_number\" : \"15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/address/1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"address",
+								"1"
 							]
 						}
 					},
