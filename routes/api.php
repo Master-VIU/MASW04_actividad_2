@@ -76,8 +76,7 @@ Route::controller(UserClientController::class)->prefix('client')->group(function
     Route::delete('/{id}', 'destroy');
 });
 
-/*
-Route::controller(UserStaffController::class)->prefix('userstaff')->group(function () {
+Route::controller(UserStaffController::class)->prefix('staff')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::post('/{id}', 'update');
@@ -86,7 +85,7 @@ Route::controller(UserStaffController::class)->prefix('userstaff')->group(functi
     Route::delete('/{id}', 'destroy');
 });
 
-
+/*
 Route::controller(AddressController::class)->prefix('address')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
