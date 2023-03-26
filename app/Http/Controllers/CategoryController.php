@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestValidateCategory;
 use App\Models\Category;
 use App\Models\ResultResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        $categories = Category::all();
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $offset = $request->has('offset') ? $request->get('offset') : 0;
+
+        $categories = Category::select('*')->orderBy('category_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
@@ -23,23 +30,23 @@ class CategoryController extends Controller
         $resultResponse->setStatus(ResultResponse::SUCCESS);
 
         return response()->json($resultResponse);
-
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateCategory $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(RequestValidateCategory $request): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
         try {
             $newCategory = new Category([
-                'name_category' => $request->get('name_category')
+                'name_category' => $request->get('name_category'),
+                'parent_category_id' => $request->get('parent_category_id')
             ]);
 
             $newCategory->save();
@@ -57,10 +64,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $categoryID
+     * @return JsonResponse
      */
-    public function show($categoryID)
+    public function show($categoryID): JsonResponse
     {
         $resultResponse = new ResultResponse();
         try {
@@ -69,7 +76,7 @@ class CategoryController extends Controller
             $resultResponse->setData($category);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
 
         }
@@ -80,18 +87,18 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateCategory $request
+     * @param $categoryID
+     * @return JsonResponse
      */
-    public function update(Request $request, $categoryID)
+    public function update(RequestValidateCategory $request, $categoryID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
         try {
-
             $category = Category::findOrFail($categoryID);
             $category->name_category = $request->get('name_category');
+            $category->name_category = $request->get('parent_category_id');
             $category->save();
 
 
@@ -105,11 +112,15 @@ class CategoryController extends Controller
         return response()->json($resultResponse);
     }
 
-
-    public function put(Request $request, $categoryID)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $categoryID
+     * @return JsonResponse
+     */
+    public function put(Request $request, $categoryID): JsonResponse
     {
-
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -117,6 +128,7 @@ class CategoryController extends Controller
             $category = Category::findOrFail($categoryID);
 
             $category->name_category = $request->get('name_category', $category->name_category);
+            $category->parent_category_id = $request->get('parent_category_id', $category->parent_category_id);
             $category->save();
 
 
@@ -129,13 +141,14 @@ class CategoryController extends Controller
 
         return response()->json($resultResponse);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $categoryID
+     * @return JsonResponse
      */
-    public function destroy($categoryID)
+    public function destroy($categoryID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -144,7 +157,7 @@ class CategoryController extends Controller
             $category = Category::findOrFail($categoryID);
             $category->delete();
 
-            $resultResponse->setData($categoryID);
+            $resultResponse->setData("Category with id=".$categoryID." has been removed.");
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         } catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::NOT_FOUND);

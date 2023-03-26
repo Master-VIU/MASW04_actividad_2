@@ -38,7 +38,7 @@ Route::controller(ShoppingCartController::class)->prefix('cart')->group(function
     Route::delete('/{id}', 'destroy');
 });
 
-/*Route::controller(CategoryController::class)->prefix('category')->group(function () {
+Route::controller(CategoryController::class)->prefix('category')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::post('/{id}', 'update');
@@ -47,7 +47,7 @@ Route::controller(ShoppingCartController::class)->prefix('cart')->group(function
     Route::delete('/{id}', 'destroy');
 });
 
-
+/*
 Route::controller(ProductController::class)->prefix('product')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
