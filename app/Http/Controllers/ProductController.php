@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestValidateProduct;
+use App\Http\Requests\RequestValidateProductOnPut;
 use App\Models\Product;
 use App\Models\ResultResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        $products = Product::all();
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $offset = $request->has('offset') ? $request->get('offset') : 0;
+
+        $products = Product::select('*')->orderBy('product_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
@@ -28,10 +36,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateProduct $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(RequestValidateProduct $request): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -60,8 +68,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param $productID
+     * @return JsonResponse
      */
     public function show($productID)
     {
@@ -72,7 +80,7 @@ class ProductController extends Controller
             $resultResponse->setData($product);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
 
         }
@@ -83,11 +91,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateProduct $request
+     * @param $productID
+     * @return JsonResponse
      */
-    public function update(Request $request, $productID)
+    public function update(RequestValidateProduct $request, $productID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -113,11 +121,15 @@ class ProductController extends Controller
         return response()->json($resultResponse);
     }
 
-
-    public function put(Request $request, $productID)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param RequestValidateProductOnPut $request
+     * @param $productID
+     * @return JsonResponse
+     */
+    public function put(RequestValidateProductOnPut $request, $productID): JsonResponse
     {
-       
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -130,6 +142,7 @@ class ProductController extends Controller
             $product->price = $request->get('price', $product->price);
             $product->properties = $request->get('properties', $product->properties);
             $product->stock = $request->get('stock', $product->stock);
+
             $product->save();
 
 
@@ -146,19 +159,19 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param $productID
+     * @return JsonResponse
      */
-    public function destroy($productID)
+    public function destroy($productID): JsonResponse
     {
         $resultResponse = new ResultResponse();
-        
+
         try{
 
             $product = Product::findOrFail($productID);
             $product->delete();
 
-            $resultResponse->setData($product);
+            $resultResponse->setData("Product with id=".$productID." has been removed.");
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         }catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::NOT_FOUND);
