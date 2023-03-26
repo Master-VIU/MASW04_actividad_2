@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestValidateProduct;
-use App\Http\Requests\RequestValidateProductOnPut;
+use App\Http\Requests\product\RequestValidateProduct;
+use App\Http\Requests\product\RequestValidateProductOnPut;
 use App\Models\Product;
 use App\Models\ResultResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {

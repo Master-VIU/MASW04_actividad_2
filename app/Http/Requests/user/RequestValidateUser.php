@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestValidateUserOnUpdate extends FormRequest
+class RequestValidateUser extends FormRequest
 {
     public function rules()
     {
         return [
-            'username' => 'required',
+            'username' => 'required|unique:user',
             'password' => 'required|min:8|max:100',
         ];
     }

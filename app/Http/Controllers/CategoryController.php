@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestValidateCategory;
+use App\Http\Requests\category\RequestValidateCategory;
+use App\Http\Requests\category\RequestValidateCategoryOnPut;
 use App\Models\Category;
 use App\Models\ResultResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -115,11 +115,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param RequestValidateCategoryOnPut $request
      * @param $categoryID
      * @return JsonResponse
      */
-    public function put(Request $request, $categoryID): JsonResponse
+    public function put(RequestValidateCategoryOnPut $request, $categoryID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 

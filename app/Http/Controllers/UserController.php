@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestValidateUser;
 use App\Http\Requests\RequestValidateUserOnUpdate;
+use App\Http\Requests\user\RequestValidateUser;
+use App\Http\Requests\user\RequestValidateUserOnPut;
 use App\Models\ResultResponse;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -86,11 +87,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param RequestValidateUserOnUpdate $request
+     * @param RequestValidateUser $request
      * @param $userID
      * @return JsonResponse
      */
-    public function update(RequestValidateUserOnUpdate $request, $userID): JsonResponse
+    public function update(RequestValidateUser $request, $userID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -115,11 +116,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param RequestValidateUserOnPut $request
      * @param $userID
      * @return JsonResponse
      */
-    public function put(Request $request, $userID): JsonResponse
+    public function put(RequestValidateUserOnPut $request, $userID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
