@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\person;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -15,11 +15,12 @@ class RequestValidatePerson extends FormRequest
     public function rules()
     {
         return [
-            'dni' => 'required|max:12|unique:person|regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i',
+            'dni' => 'required|max:12|regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i|unique:person,dni',
             'name' => 'required|min:2|max:50|regex:/^[\pL\s]+$/u',
             'surname' => 'required|min:2|max:50|regex:/^[\pL\s]+$/u',
-            'email' => 'required|email|unique:person',
+            'email' => 'required|email|unique:person,email',
             'telephone' => 'required|min:9|max:50',
+            'user_id' => 'required|numeric|exists:user,user_id'
         ];
     }
 }

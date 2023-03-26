@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestValidatePerson;
+use App\Http\Requests\person\RequestValidatePerson;
+use App\Http\Requests\person\RequestValidatePersonOnPut;
 use App\Models\Person;
 use App\Models\ResultResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        $persons = Person::all();
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $offset = $request->has('offset') ? $request->get('offset') : 0;
+
+        $persons = Person::select('*')->orderBy('person_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
@@ -30,13 +37,11 @@ class PersonController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param RequestValidatePerson $request
+     * @return JsonResponse
      */
-    public function store(RequestValidatePerson $request)
+    public function store(RequestValidatePerson $request): JsonResponse
     {
-        $request->validated();
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -65,10 +70,10 @@ class PersonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Person  $person
-     * @return \Illuminate\Http\Response
+     * @param $personID
+     * @return JsonResponse
      */
-    public function show($personID)
+    public function show($personID): JsonResponse
     {
         $resultResponse = new ResultResponse();
         try {
@@ -77,7 +82,7 @@ class PersonController extends Controller
             $resultResponse->setData($person);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
 
         }
@@ -87,13 +92,13 @@ class PersonController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Person  $person
-     * @return \Illuminate\Http\Response
+     * @param RequestValidatePerson $request
+     * @param $personID
+     * @return JsonResponse
      */
-    public function update(Request $request, $personID)
+    public function update(RequestValidatePerson $request, $personID): JsonResponse
     {
-        
+
         $resultResponse = new ResultResponse();
 
         try {
@@ -104,7 +109,8 @@ class PersonController extends Controller
             $person->surname = $request->get('surname');
             $person->email = $request->get('email');
             $person->telephone = $request->get('telephone');
-  
+            $person->user_id = $request->get('user_id');
+
             $person->save();
 
 
@@ -118,11 +124,15 @@ class PersonController extends Controller
         return response()->json($resultResponse);
     }
 
-
-    public function put(Request $request, $personID)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param RequestValidatePersonOnPut $request
+     * @param $personID
+     * @return JsonResponse
+     */
+    public function put(RequestValidatePersonOnPut $request, $personID): JsonResponse
     {
-       
-
         $resultResponse = new ResultResponse();
 
         try {
@@ -133,7 +143,8 @@ class PersonController extends Controller
             $person->name = $request->get('name', $person->name);
             $person->surname = $request->get('surname', $person->surname);
             $person->email = $request->get('email', $person->email);
-            $person->telephone = $request->get('telephone', $person->dni);
+            $person->telephone = $request->get('telephone', $person->telephone);
+            $person->user_id = $request->get('user_id', $person->user_id);
             $person->save();
 
 
@@ -146,13 +157,14 @@ class PersonController extends Controller
 
         return response()->json($resultResponse);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Person  $person
-     * @return \Illuminate\Http\Response
+     * @param $personID
+     * @return JsonResponse
      */
-    public function destroy($personID)
+    public function destroy($personID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -161,7 +173,7 @@ class PersonController extends Controller
             $person = Person::findOrFail($personID);
             $person->delete();
 
-            $resultResponse->setData($person);
+            $resultResponse->setData("Person with id=".$personID." has been removed.");
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         }catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::NOT_FOUND);

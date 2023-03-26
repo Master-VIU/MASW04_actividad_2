@@ -771,14 +771,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/person/1",
-							"protocol": "http",
+							"raw": "{{API}}/person/1",
 							"host": [
-								"localhost"
+								"{{API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"person",
 								"1"
 							]
@@ -825,14 +822,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/person/",
-							"protocol": "http",
+							"raw": "{{API}}/person/",
 							"host": [
-								"localhost"
+								"{{API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"person",
 								""
 							]
@@ -861,48 +855,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/person/1",
-							"protocol": "http",
+							"raw": "{{API}}/person/2",
 							"host": [
-								"localhost"
+								"{{API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"person",
-								"1"
-							],
-							"query": [
-								{
-									"key": "dni",
-									"value": "12345678P",
-									"disabled": true
-								},
-								{
-									"key": "name",
-									"value": "Fabian",
-									"disabled": true
-								},
-								{
-									"key": "surname",
-									"value": "Gomez",
-									"disabled": true
-								},
-								{
-									"key": "email",
-									"value": "fab@email.com",
-									"disabled": true
-								},
-								{
-									"key": "telephone",
-									"value": "123456789",
-									"disabled": true
-								},
-								{
-									"key": "user_id",
-									"value": "1",
-									"disabled": true
-								}
+								"2"
 							]
 						}
 					},
@@ -912,10 +871,16 @@
 					"name": "UPDATE FIELD",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"surname\": \"Parra\"\r\n      \r\n}",
+							"raw": "{\r\n    \"dni\" : \"12415509Q\",\r\n    \"name\" : \"Israel\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -923,14 +888,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/person/2",
-							"protocol": "http",
+							"raw": "{{API}}/person/2",
 							"host": [
-								"localhost"
+								"{{API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"person",
 								"2"
 							]

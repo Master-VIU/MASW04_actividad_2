@@ -57,7 +57,6 @@ Route::controller(ProductController::class)->prefix('product')->group(function (
     Route::delete('/{id}', 'destroy');
 });
 
-/*
 Route::controller(PersonController::class)->prefix('person')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -67,6 +66,7 @@ Route::controller(PersonController::class)->prefix('person')->group(function () 
     Route::delete('/{id}', 'destroy');
 });
 
+/*
 Route::controller(UserStaffController::class)->prefix('userstaff')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
