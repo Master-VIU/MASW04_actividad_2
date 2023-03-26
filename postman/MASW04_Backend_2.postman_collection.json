@@ -2024,12 +2024,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product?offset=0&limit=3",
+							"raw": "{{API}}/client_address?offset=0&limit=3",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product"
+								"client_address"
 							],
 							"query": [
 								{
@@ -2160,7 +2160,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": \"a\"\r\n}",
+							"raw": "{\r\n    \"address_id\": 7\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2168,12 +2168,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/client_address/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"client_address",
 								"1"
 							]
 						}
