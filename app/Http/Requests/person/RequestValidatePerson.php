@@ -2,9 +2,16 @@
 
 namespace App\Http\Requests\person;
 
+use App\Models\ResultResponse;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpFoundation\Response;
+
+use Illuminate\Contracts\Validation\Validator;
 
 class RequestValidatePerson extends FormRequest
+
+
 {
 
     /**
@@ -22,5 +29,14 @@ class RequestValidatePerson extends FormRequest
             'telephone' => 'required|min:9|max:50',
             'user_id' => 'required|numeric|exists:user,user_id'
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $resultResponse = new ResultResponse();
+        $resultResponse->setStatus(ResultResponse::UNPROCESSABLE_CONTENT);
+        $resultResponse->setData($validator->errors());
+        throw new HttpResponseException(response()->json($resultResponse,
+         Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

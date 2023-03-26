@@ -2,7 +2,12 @@
 
 namespace App\Http\Requests\order;
 
+use App\Models\ResultResponse;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpFoundation\Response;
+
+use Illuminate\Contracts\Validation\Validator;
 
 class RequestValidateOrder extends FormRequest
 {
@@ -18,5 +23,14 @@ class RequestValidateOrder extends FormRequest
             'client_id' => 'required|numeric|exists:user_client,user_client_id',
             'shopping_cart_id' => 'required|numeric|exists:shopping_cart,shopping_cart_id',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $resultResponse = new ResultResponse();
+        $resultResponse->setStatus(ResultResponse::UNPROCESSABLE_CONTENT);
+        $resultResponse->setData($validator->errors());
+        throw new HttpResponseException(response()->json($resultResponse,
+         Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

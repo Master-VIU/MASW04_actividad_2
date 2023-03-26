@@ -8,6 +8,8 @@ class ResultResponse
     const ERROR = array("code"=>300, "message"=>"Error");
     const NOT_FOUND = array("code"=>404, "message"=>"Element not found");
 
+    const UNPROCESSABLE_CONTENT = array("code"=>422, "message"=>"Unprocessable Content");
+
     public $data;
     public $code;
     public $message;
