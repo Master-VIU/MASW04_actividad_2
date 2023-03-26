@@ -20,10 +20,39 @@ class PersonController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+
+        $query = Person::select('*');
+
+        if ($request->has('dni')) {
+            $query = $query->where('dni', 'ilike', '%'.$request->get('dni').'%');
+        }
+        if ($request->has('name')) {
+            $query = $query->where('name', 'ilike', '%'.$request->get('name').'%');
+        }
+        if ($request->has('surname')) {
+            $query = $query->where('surname', 'ilike', '%'.$request->get('surname').'%');
+        }
+        if ($request->has('email')) {
+            $query = $query->where('email', 'ilike', '%'.$request->get('email').'%');
+        }
+        if ($request->has('telephone')) {
+            $query = $query->where('telephone', 'ilike', '%'.$request->get('telephone').'%');
+        }
+        if ($request->has('user_id')) {
+            $query = $query->where('user_id', 'ilike', '%'.$request->get('user_id').'%');
+        }
+        if ($request->has('search')) {
+            $query = $query->where('dni', 'ilike', '%'.$request->get('search').'%')
+                          ->orWhere('name', 'ilike', '%'.$request->get('search').'%')
+                          ->orWhere('surname', 'ilike', '%'.$request->get('search').'%')
+                          ->orWhere('email', 'ilike', '%'.$request->get('search').'%')
+                          ->orWhere('telephone', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $persons = Person::select('*')->orderBy('person_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $persons = $query->orderBy('person_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

@@ -17,10 +17,19 @@ class ShoppingCartController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = ShoppingCart::select('*');
+
+        if ($request->has('total_cost')) {
+            $query = $query->where('total_cost', 'like', '%'.$request->get('total_cost').'%');
+        }
+        if ($request->has('search')) {
+            $query = $query->where('total_cost', 'like', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $cars = ShoppingCart::select('*')->orderBy('shopping_cart_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $cars = $query->orderBy('shopping_cart_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

@@ -19,10 +19,36 @@ class ProductController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Product::select('*');
+
+        if ($request->has('category_id')) {
+            $query = $query->where('category_id', 'ilike', '%'.$request->get('category_id').'%');
+        }
+        if ($request->has('name')) {
+            $query = $query->where('name', 'ilike', '%'.$request->get('name').'%');
+        }
+        if ($request->has('description')) {
+            $query = $query->where('description', 'ilike', '%'.$request->get('description').'%');
+        }
+        if ($request->has('price')) {
+            $query = $query->where('price', 'ilike', '%'.$request->get('price').'%');
+        }
+        if ($request->has('properties')) {
+            $query = $query->where('properties', 'ilike', '%'.$request->get('properties').'%');
+        }
+        if ($request->has('stock')) {
+            $query = $query->where('stock', 'ilike', '%'.$request->get('stock').'%');
+        }
+        if ($request->has('search')) {
+            $query = $query->where('name', 'ilike', '%'.$request->get('search').'%')
+                        ->orWhere('description', 'ilike', '%'.$request->get('search').'%')
+                        ->orWhere('properties', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $products = Product::select('*')->orderBy('product_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $products = $query->orderBy('product_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

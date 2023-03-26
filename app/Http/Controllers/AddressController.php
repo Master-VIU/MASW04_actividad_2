@@ -20,10 +20,29 @@ class AddressController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Address::select('*');
+
+        if ($request->has('street')) {
+            $query = $query->where('street', 'ilike', '%'.$request->get('street').'%');
+        }
+        if ($request->has('street_number')) {
+            $query = $query->where('street_number', '=', $request->get('street_number'));
+        }
+        if ($request->has('city')) {
+            $query = $query->where('city', 'ilike', '%'.$request->get('city').'%');
+        }
+        if ($request->has('postal_code')) {
+            $query = $query->where('postal_code', '=', $request->get('postal_code'));
+        }
+        if ($request->has('search')) {
+            $query = $query->where('street', 'ilike', '%'.$request->get('search').'%')
+                        ->orWhere('city', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $addresses = Address::select('*')->orderBy('address_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $addresses = $query->orderBy('address_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

@@ -19,10 +19,29 @@ class RepairmentController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Repairment::select('*');
+
+        if ($request->has('description')) {
+            $query = $query->where('description', 'ilike', '%'.$request->get('description').'%');
+        }
+        if ($request->has('price')) {
+            $query = $query->where('price', '=', $request->get('price'));
+        }
+        if ($request->has('staff_id')) {
+            $query = $query->where('staff_id', '=', $request->get('staff_id'));
+        }
+        if ($request->has('client_id')) {
+            $query = $query->where('client_id', '=', $request->get('client_id'));
+        }
+
+        if ($request->has('search')) {
+            $query = $query->where('description', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $repairments = Repairment::select('*')->orderBy('repairment_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $repairments = $query->orderBy('repairment_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

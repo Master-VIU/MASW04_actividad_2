@@ -20,10 +20,19 @@ class UserController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = User::select('*');
+
+        if ($request->has('username')) {
+            $query = $query->where('username', 'ilike', '%'.$request->get('username').'%');
+        }
+        if ($request->has('search')) {
+            $query = $query->where('username', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $users = User::select('*')->orderBy('user_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $users = $query->orderBy('user_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

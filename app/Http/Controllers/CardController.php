@@ -19,10 +19,29 @@ class CardController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Card::select('*');
+
+        if ($request->has('card_number')) {
+            $query = $query->where('card_number', '=', $request->get('card_number'));
+        }
+        if ($request->has('type')) {
+            $query = $query->where('type', 'ilike', '%'.$request->get('type').'%');
+        }
+        if ($request->has('cvv')) {
+            $query = $query->where('cvv', '=', $request->get('cvv'));
+        }
+        if ($request->has('user_client_id')) {
+            $query = $query->where('user_client_id', '=', $request->get('user_client_id'));
+        }
+
+        if ($request->has('search')) {
+            $query = $query->where('type', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $cards = Card::select('*')->orderBy('card_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $cards = $query->orderBy('card_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

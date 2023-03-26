@@ -180,7 +180,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/user?offset=0&limit=10",
+							"raw": "{{API}}/user?offset=0&limit=2&search=admin",
 							"host": [
 								"{{API}}"
 							],
@@ -194,7 +194,16 @@
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "2"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "admin"
 								}
 							]
 						}
@@ -245,7 +254,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/cart?offset=0&limit=3",
+							"raw": "{{API}}/cart?offset=0&limit=3&total_cost=1035",
 							"host": [
 								"{{API}}"
 							],
@@ -260,6 +269,15 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "total_cost",
+									"value": "1035"
+								},
+								{
+									"key": "search",
+									"value": "1035.00",
+									"disabled": true
 								}
 							]
 						}
@@ -385,7 +403,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API}}/category?offset=0&limit=3",
+							"raw": "{{API}}/category?offset=0&limit=3&search=key",
 							"host": [
 								"{{API}}"
 							],
@@ -400,6 +418,20 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "name_category",
+									"value": "key",
+									"disabled": true
+								},
+								{
+									"key": "parent_category_id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "key"
 								}
 							]
 						}
@@ -575,7 +607,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product?offset=0&limit=3",
+							"raw": "{{API}}/product?offset=0&limit=10&search=100%",
 							"host": [
 								"{{API}}"
 							],
@@ -589,7 +621,41 @@
 								},
 								{
 									"key": "limit",
-									"value": "3"
+									"value": "10"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "key",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "key",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "65.5",
+									"disabled": true
+								},
+								{
+									"key": "properties",
+									"value": "swappable",
+									"disabled": true
+								},
+								{
+									"key": "stock",
+									"value": "134",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "100%"
 								}
 							]
 						}
@@ -742,7 +808,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/person?offset=0&limit=3",
+							"raw": "{{API}}/person?offset=0&limit=3&search=admin",
 							"host": [
 								"{{API}}"
 							],
@@ -757,6 +823,40 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "dni",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "a",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "a",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "gmail",
+									"disabled": true
+								},
+								{
+									"key": "telephone",
+									"value": "1234",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "admin"
 								}
 							]
 						}
@@ -1074,7 +1174,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/client?offset=0&limit=3",
+							"raw": "{{API}}/client?offset=0&limit=10&user_id=50",
 							"host": [
 								"{{API}}"
 							],
@@ -1088,7 +1188,21 @@
 								},
 								{
 									"key": "limit",
-									"value": "3"
+									"value": "10"
+								},
+								{
+									"key": "shopping_cart_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "50"
+								},
+								{
+									"key": "search",
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
@@ -1292,7 +1406,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/staff?offset=0&limit=3",
+							"raw": "{{API}}/staff?offset=0&limit=3&user_id=1",
 							"host": [
 								"{{API}}"
 							],
@@ -1307,6 +1421,20 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "role",
+									"value": "tech",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": "consultant",
+									"disabled": true
 								}
 							]
 						}
@@ -1357,7 +1485,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/address?offset=0&limit=3",
+							"raw": "{{API}}/address?offset=0&limit=3&search=Mad",
 							"host": [
 								"{{API}}"
 							],
@@ -1372,6 +1500,30 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "street",
+									"value": "Calle",
+									"disabled": true
+								},
+								{
+									"key": "street_number",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Madrid",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "Mad"
 								}
 							]
 						}
@@ -1523,7 +1675,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/card?offset=0&limit=3",
+							"raw": "{{API}}/card?offset=0&limit=3&type=credit",
 							"host": [
 								"{{API}}"
 							],
@@ -1538,6 +1690,30 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "card_number",
+									"value": "67384410334357469277",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "credit"
+								},
+								{
+									"key": "cvv",
+									"value": "482",
+									"disabled": true
+								},
+								{
+									"key": "user_client_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
 								}
 							]
 						}
@@ -1690,7 +1866,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/rating?offset=0&limit=3",
+							"raw": "{{API}}/rating?offset=0&limit=3&search=buen",
 							"host": [
 								"{{API}}"
 							],
@@ -1705,6 +1881,30 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "rate",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "opinion",
+									"value": "un",
+									"disabled": true
+								},
+								{
+									"key": "user_client_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "buen"
 								}
 							]
 						}
@@ -1857,7 +2057,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/cart_product?offset=0&limit=3",
+							"raw": "{{API}}/cart_product?offset=0&limit=3&search=9",
 							"host": [
 								"{{API}}"
 							],
@@ -1872,6 +2072,25 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "shopping_cart_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "quantity",
+									"value": "9",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "9"
 								}
 							]
 						}
@@ -2024,7 +2243,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/client_address?offset=0&limit=3",
+							"raw": "{{API}}/client_address?offset=0&limit=3&address_id=1",
 							"host": [
 								"{{API}}"
 							],
@@ -2039,6 +2258,20 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "address_id",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
@@ -2191,7 +2424,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/order?offset=0&limit=3",
+							"raw": "{{API}}/order?offset=0&limit=3&search=in the way",
 							"host": [
 								"{{API}}"
 							],
@@ -2206,6 +2439,40 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "price",
+									"value": "13069.8",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "way",
+									"disabled": true
+								},
+								{
+									"key": "card_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "address_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "shopping_cart_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "in the way"
 								}
 							]
 						}
@@ -2358,7 +2625,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product_image?offset=0&limit=3",
+							"raw": "{{API}}/product_image?offset=0&limit=3&image_path=.png",
 							"host": [
 								"{{API}}"
 							],
@@ -2373,6 +2640,20 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "product_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "image_path",
+									"value": ".png"
+								},
+								{
+									"key": "search",
+									"value": "images",
+									"disabled": true
 								}
 							]
 						}
@@ -2525,7 +2806,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/repairment?offset=0&limit=3",
+							"raw": "{{API}}/repairment?offset=0&limit=3&search=mouse",
 							"host": [
 								"{{API}}"
 							],
@@ -2540,6 +2821,30 @@
 								{
 									"key": "limit",
 									"value": "3"
+								},
+								{
+									"key": "description",
+									"value": "keyboard",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "22.2",
+									"disabled": true
+								},
+								{
+									"key": "staff_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "mouse"
 								}
 							]
 						}

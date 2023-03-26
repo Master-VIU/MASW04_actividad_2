@@ -19,10 +19,22 @@ class UserStaffController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = UserStaff::select('*');
+
+        if ($request->has('role')) {
+            $query = $query->where('role', 'ilike', '%'.$request->get('role').'%');
+        }
+        if ($request->has('user_id')) {
+            $query = $query->where('user_id', '=', $request->get('user_id'));
+        }
+        if ($request->has('search')) {
+            $query = $query->where('role', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $staff = UserStaff::select('*')->orderBy('user_staff_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $staff = $query->orderBy('user_staff_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

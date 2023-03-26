@@ -19,10 +19,23 @@ class ClientAddressController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = ClientAddress::select('*');
+
+        if ($request->has('client_id')) {
+            $query = $query->where('client_id', '=', $request->get('client_id'));
+        }
+        if ($request->has('address_id')) {
+            $query = $query->where('address_id', '=', $request->get('address_id'));
+        }
+        if ($request->has('search')) {
+            $query = $query->where('client_id', '=', $request->get('search'))
+                        ->orWhere('address_id', '=', $request->get('search'));
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $client_address = ClientAddress::select('*')->orderBy('client_address_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $client_address = $query->orderBy('client_address_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

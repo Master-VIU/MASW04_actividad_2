@@ -20,10 +20,23 @@ class UserClientController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = UserClient::select('*');
+
+        if ($request->has('shopping_cart_id')) {
+            $query = $query->where('shopping_cart_id', '=', $request->get('shopping_cart_id'));
+        }
+        if ($request->has('user_id')) {
+            $query = $query->where('user_id', '=', $request->get('user_id'));
+        }
+        if ($request->has('search')) {
+            $query = $query->where('shopping_cart_id', '=', $request->get('search'))
+                ->orWhere('user_id', '=', $request->get('search'));
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $users = UserClient::select('*')->orderBy('user_client_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $users = $query->orderBy('user_client_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

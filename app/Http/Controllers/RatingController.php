@@ -19,10 +19,29 @@ class RatingController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Rating::select('*');
+
+        if ($request->has('rate')) {
+            $query = $query->where('rate', '=', $request->get('rate'));
+        }
+        if ($request->has('opinion')) {
+            $query = $query->where('opinion', 'ilike', '%'.$request->get('opinion').'%');
+        }
+        if ($request->has('user_client_id')) {
+            $query = $query->where('user_client_id', '=', $request->get('user_client_id'));
+        }
+        if ($request->has('product_id')) {
+            $query = $query->where('product_id', '=', $request->get('product_id'));
+        }
+
+        if ($request->has('search')) {
+            $query = $query->where('opinion', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $ratings = Rating::select('*')->orderBy('rating_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $ratings = $query->orderBy('rating_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

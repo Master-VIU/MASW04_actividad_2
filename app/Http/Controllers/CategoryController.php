@@ -19,10 +19,22 @@ class CategoryController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Category::select('*');
+
+        if ($request->has('name_category')) {
+            $query = $query->where('name_category', 'ilike', '%'.$request->get('name_category').'%');
+        }
+        if ($request->has('parent_category_id')) {
+            $query = $query->where('parent_category_id', 'like', '%'.$request->get('parent_category_id').'%');
+        }
+        if ($request->has('search')) {
+            $query = $query->where('name_category', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $categories = Category::select('*')->orderBy('category_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $categories = $query->orderBy('category_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

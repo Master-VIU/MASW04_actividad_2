@@ -20,10 +20,23 @@ class ProductImageController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = ProductImage::select('*');
+
+        if ($request->has('image_path')) {
+            $query = $query->where('image_path', 'ilike', '%'.$request->get('image_path').'%');
+        }
+        if ($request->has('product_id')) {
+            $query = $query->where('product_id', '=', $request->get('product_id'));
+        }
+
+        if ($request->has('search')) {
+            $query = $query->where('image_path', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $productImage = ProductImage::select('*')->orderBy('image_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $productImage = $query->orderBy('image_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

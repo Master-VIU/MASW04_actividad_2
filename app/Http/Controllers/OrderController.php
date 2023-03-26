@@ -19,10 +19,35 @@ class OrderController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = Order::select('*');
+
+        if ($request->has('price')) {
+            $query = $query->where('price', '=', $request->get('price'));
+        }
+        if ($request->has('location')) {
+            $query = $query->where('location', 'ilike', '%'.$request->get('location').'%');
+        }
+        if ($request->has('card_id')) {
+            $query = $query->where('card_id', '=', $request->get('card_id'));
+        }
+        if ($request->has('address_id')) {
+            $query = $query->where('address_id', '=', $request->get('address_id'));
+        }
+        if ($request->has('client_id')) {
+            $query = $query->where('client_id', '=', $request->get('client_id'));
+        }
+        if ($request->has('shopping_cart_id')) {
+            $query = $query->where('shopping_cart_id', '=', $request->get('shopping_cart_id'));
+        }
+
+        if ($request->has('search')) {
+            $query = $query->where('location', 'ilike', '%'.$request->get('search').'%');
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $orders = Order::select('*')->orderBy('order_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $orders = $query->orderBy('order_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 

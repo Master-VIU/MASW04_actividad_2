@@ -19,10 +19,28 @@ class ShoppingCartProductController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $query = ShoppingCartProduct::select('*');
+
+        if ($request->has('shopping_cart_id')) {
+            $query = $query->where('shopping_cart_id', '=', $request->get('shopping_cart_id'));
+        }
+        if ($request->has('product_id')) {
+            $query = $query->where('product_id', '=', $request->get('product_id'));
+        }
+        if ($request->has('quantity')) {
+            $query = $query->where('quantity', '=', $request->get('quantity'));
+        }
+
+        if ($request->has('search')) {
+            $query = $query->where('shopping_cart_id', '=', $request->get('search'))
+                ->orWhere('product_id', '=', $request->get('search'))
+                ->orWhere('quantity', '=', $request->get('search'));
+        }
+
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $cart_products = ShoppingCartProduct::select('*')->orderBy('shopping_cart_product_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
+        $cart_products = $query->orderBy('shopping_cart_product_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
