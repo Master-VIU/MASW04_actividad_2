@@ -2051,12 +2051,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/client_address/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"client_address",
 								"1"
 							]
 						}
@@ -2069,12 +2069,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/client_address/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"client_address",
 								"1"
 							]
 						}
@@ -2094,7 +2094,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"Ordenador HP\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"client_id\": 1,\r\n    \"address_id\": 4\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2102,12 +2102,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/",
+							"raw": "{{API}}/client_address/",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"client_address",
 								""
 							]
 						}
@@ -2127,7 +2127,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 2,\r\n    \"name\": \"Ordenador HP443\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"client_id\": 1,\r\n    \"address_id\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2135,12 +2135,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/client_address/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"client_address",
 								"1"
 							]
 						}
@@ -2160,7 +2160,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"address_id\": 7\r\n}",
+							"raw": "{\r\n    \"address_id\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2191,12 +2191,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product?offset=0&limit=3",
+							"raw": "{{API}}/order?offset=0&limit=3",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product"
+								"order"
 							],
 							"query": [
 								{
@@ -2218,12 +2218,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/order/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"order",
 								"1"
 							]
 						}
@@ -2236,12 +2236,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/order/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"order",
 								"1"
 							]
 						}
@@ -2261,7 +2261,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"Ordenador HP\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"price\": \"91.9\",\r\n    \"order_date\": \"2023-03-25\",\r\n    \"shipping_date\": \"2023-03-25\",\r\n    \"location\": \"In the way\",\r\n    \"card_id\": 2,\r\n    \"address_id\": 2,\r\n    \"client_id\": 2,\r\n    \"shopping_cart_id\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2269,12 +2269,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/",
+							"raw": "{{API}}/order/",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"order",
 								""
 							]
 						}
@@ -2294,7 +2294,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 2,\r\n    \"name\": \"Ordenador HP443\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"price\": \"91.9\",\r\n    \"order_date\": \"2023-03-25\",\r\n    \"shipping_date\": \"2023-03-25\",\r\n    \"location\": \"In the way\",\r\n    \"card_id\": 2,\r\n    \"address_id\": 2,\r\n    \"client_id\": 2,\r\n    \"shopping_cart_id\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2302,12 +2302,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/order/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"order",
 								"1"
 							]
 						}
@@ -2327,7 +2327,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": \"a\"\r\n}",
+							"raw": "{\r\n    \"price\": \"91.9\",\r\n    \"order_date\": \"2023-03-25\",\r\n    \"shipping_date\": \"2023-03-25\",\r\n    \"location\": \"In the way\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2335,12 +2335,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/order/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"order",
 								"1"
 							]
 						}

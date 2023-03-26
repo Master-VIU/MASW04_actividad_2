@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ClientAddressController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingController;
@@ -133,7 +134,7 @@ Route::controller(ClientAddressController::class)->prefix('client_address')->gro
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-/*
+
 Route::controller(OrderController::class)->prefix('order')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -142,7 +143,7 @@ Route::controller(OrderController::class)->prefix('order')->group(function () {
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-
+/*
 Route::controller(ProductImageController::class)->prefix('product_image')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
