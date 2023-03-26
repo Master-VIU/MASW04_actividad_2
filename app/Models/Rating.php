@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\tmp;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,6 @@ class Rating extends Model
     protected $primaryKey = "rating_id";
 
     protected $fillable = [
-        'rating_id',
         'rate',
         'opinion',
         'date',

@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\UserClientController;
 use App\Http\Controllers\UserController;
@@ -103,7 +104,7 @@ Route::controller(CardController::class)->prefix('card')->group(function () {
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-/*
+
 Route::controller(RatingController::class)->prefix('rating')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -112,7 +113,7 @@ Route::controller(RatingController::class)->prefix('rating')->group(function () 
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-
+/*
 Route::controller(ShoppingCartProductController::class)->prefix('cart_product')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');

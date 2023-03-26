@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             AddressTableSeeder::class,
             CardTableSeeder::class,
             // RepairmentTableSeeder::class,
-            // RatingTableSeeder::class,
+            RatingTableSeeder::class,
             // ShoppingCartProductTableSeeder::class,
             // ClientAddressTableSeeder::class,
             // OrderTableSeeder::class,
