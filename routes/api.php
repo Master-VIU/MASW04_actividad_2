@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientAddressController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ShoppingCartProductController;
@@ -143,7 +144,7 @@ Route::controller(OrderController::class)->prefix('order')->group(function () {
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-/*
+
 Route::controller(ProductImageController::class)->prefix('product_image')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -152,7 +153,7 @@ Route::controller(ProductImageController::class)->prefix('product_image')->group
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-
+/*
 Route::controller(RepairmentController::class)->prefix('repairment')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');

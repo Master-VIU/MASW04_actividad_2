@@ -2358,12 +2358,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product?offset=0&limit=3",
+							"raw": "{{API}}/product_image?offset=0&limit=3",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product"
+								"product_image"
 							],
 							"query": [
 								{
@@ -2385,12 +2385,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/product_image/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"product_image",
 								"1"
 							]
 						}
@@ -2403,12 +2403,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/product_image/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"product_image",
 								"1"
 							]
 						}
@@ -2428,7 +2428,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"Ordenador HP\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"product_id\": 1,\r\n    \"image_path\": \"/images/9.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2436,12 +2436,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/",
+							"raw": "{{API}}/product_image/",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"product_image",
 								""
 							]
 						}
@@ -2461,7 +2461,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 2,\r\n    \"name\": \"Ordenador HP443\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"product_id\": 1,\r\n    \"image_path\": \"/images/9.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2469,12 +2469,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/product_image/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"product_image",
 								"1"
 							]
 						}
@@ -2494,7 +2494,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": \"a\"\r\n}",
+							"raw": "{\r\n    \"image_path\": \"/images/7.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2502,12 +2502,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/product_image/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"product_image",
 								"1"
 							]
 						}
