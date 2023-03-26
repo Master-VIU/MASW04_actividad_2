@@ -6,6 +6,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\ShoppingCartProductController;
 use App\Http\Controllers\UserClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
@@ -113,7 +114,7 @@ Route::controller(RatingController::class)->prefix('rating')->group(function () 
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-/*
+
 Route::controller(ShoppingCartProductController::class)->prefix('cart_product')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -123,7 +124,7 @@ Route::controller(ShoppingCartProductController::class)->prefix('cart_product')-
     Route::delete('/{id}', 'destroy');
 });
 
-Route::controller(ClientAddressController::class)->prefix('client_address')->group(function () {
+/*Route::controller(ClientAddressController::class)->prefix('client_address')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::post('/{id}', 'update');
