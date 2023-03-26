@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\user\RequestValidateRating;
-use App\Http\Requests\user\RequestValidateRatingOnPut;
+use App\Http\Requests\rating\RequestValidateRating;
+use App\Http\Requests\rating\RequestValidateRatingOnPut;
 use App\Models\Rating;
 use App\Models\ResultResponse;
 use Illuminate\Http\JsonResponse;

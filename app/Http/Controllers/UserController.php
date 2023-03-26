@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestValidateUserOnUpdate;
 use App\Http\Requests\user\RequestValidateUser;
 use App\Http\Requests\user\RequestValidateUserOnPut;
 use App\Models\ResultResponse;
@@ -16,6 +15,7 @@ class UserController extends Controller
     /**
      * Display a paginated listing of the resource.
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function index(Request $request): JsonResponse
