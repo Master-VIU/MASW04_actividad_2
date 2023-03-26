@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\UserClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserStaffController;
@@ -58,6 +59,15 @@ Route::controller(ProductController::class)->prefix('product')->group(function (
 });
 
 Route::controller(PersonController::class)->prefix('person')->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::post('/{id}', 'update');
+    Route::put('/{id}', 'put');
+    Route::get('/{id}', 'show');
+    Route::delete('/{id}', 'destroy');
+});
+
+Route::controller(UserClientController::class)->prefix('client')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::post('/{id}', 'update');

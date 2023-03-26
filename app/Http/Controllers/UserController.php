@@ -156,7 +156,7 @@ class UserController extends Controller
         try{
 
             $user = User::findOrFail($userID);
-            $user->softDelete();
+            $user->delete();
 
             $resultResponse->setData("User with id=".$userID." has been removed.");
             $resultResponse->setStatus(ResultResponse::SUCCESS);
