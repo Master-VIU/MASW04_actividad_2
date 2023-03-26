@@ -9,17 +9,19 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = "product";
+    protected $table = 'product';
     protected $primaryKey = "product_id";
-
+    /**
+     * The attributes that are mass assignablse.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'product_id',
-        'categorproduct_idy_id',
         'category_id',
         'name',
         'description',
         'price',
         'properties',
-        'stock',
+        'stock'        
     ];
 }

@@ -19,7 +19,7 @@ class ShoppingCartTableSeeder extends Seeder
         $shoppingCarts = range(0, 41);
         foreach ($shoppingCarts as $shoppingCart) {
             DB::table('shopping_cart')->insert([
-                'total_cost' => 0,
+                'total_cost' => rand(100, 2000),
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ]);

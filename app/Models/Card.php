@@ -13,7 +13,6 @@ class Card extends Model
     protected $primaryKey = "card_id";
 
     protected $fillable = [
-        'card_id',
         'card_number',
         'type',
         'cvv',

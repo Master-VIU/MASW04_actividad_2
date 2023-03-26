@@ -13,7 +13,6 @@ class Rating extends Model
     protected $primaryKey = "rating_id";
 
     protected $fillable = [
-        'rating_id',
         'rate',
         'opinion',
         'date',

@@ -13,9 +13,7 @@ class ClientAddress extends Model
     protected $primaryKey = "client_address_id";
 
     protected $fillable = [
-        'client_address_id',
         'client_id',
-        'address_id',
-        'client_id',
+        'address_id'
     ];
 }

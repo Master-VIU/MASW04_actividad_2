@@ -12,9 +12,9 @@ class UserStaff extends Model
     protected $table = "user_staff";
     protected $primaryKey = "user_staff_id";
 
+
     protected $fillable = [
-        'user_staff_id',
         'role',
-        'user_id',
+        'user_id'
     ];
 }

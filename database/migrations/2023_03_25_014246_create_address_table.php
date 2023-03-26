@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('postal_code')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 

@@ -9,11 +9,14 @@ class ShoppingCart extends Model
 {
     use HasFactory;
 
-    protected $table = "shopping_cart";
+    protected $table = 'shopping_cart';
     protected $primaryKey = "shopping_cart_id";
-
+    /**
+     * The attributes that are mass assignablse.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'shopping_cart_id',
-        'total_cost',
+        'total_cost'     
     ];
 }

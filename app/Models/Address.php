@@ -9,14 +9,17 @@ class Address extends Model
 {
     use HasFactory;
 
-    protected $table = "address";
+    protected $table = 'address';
     protected $primaryKey = "address_id";
-
+    /**
+     * The attributes that are mass assignablse.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'address_id',
         'street',
         'street_number',
         'city',
-        'postal_code',
+        'postal_code'       
     ];
 }

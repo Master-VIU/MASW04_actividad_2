@@ -10,10 +10,9 @@ class Repairment extends Model
     use HasFactory;
 
     protected $table = "repairment";
-    protected $primaryKey = "repariment_id";
+    protected $primaryKey = "repairment_id";
 
     protected $fillable = [
-        'repariment_id',
         'description',
         'request_date',
         'repairment_date',

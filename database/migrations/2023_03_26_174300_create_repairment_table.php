@@ -13,21 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->id('product_id');
-            $table->foreignId('category_id')->references('category_id')->on('category')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->string('name', 100)->nullable(false);
+        Schema::create('repairment', function (Blueprint $table) {
+            $table->id('repairment_id');
             $table->string('description', 250)->nullable(false);
+            $table->timestamp('request_date')->nullable(false);
+            $table->timestamp('repairment_date')->nullable(false);
             $table->float('price')->nullable(false);
-            $table->string('properties', 250)->nullable(false);
-            $table->integer('stock')->nullable(false);
+            $table->foreignId('staff_id')->references('user_staff_id')->on('user_staff')
+                ->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('client_id')->references('user_client_id')->on('user_client')
+                ->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
             $table->softDeletes();
-            $table->unique(['category_id', 'name']);
         });
-
-        // find way to check that price is always above zero point zero
     }
 
     /**
@@ -37,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('repairment');
     }
 };

@@ -19,7 +19,8 @@ return new class extends Migration
                 ->on('shopping_cart')->onUpdate('cascade')->onDelete('cascade');;
             $table->foreignId('user_id')->unique()->references('user_id')->on('user')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamps();            
+            $table->softDeletes();
         });
     }
 
