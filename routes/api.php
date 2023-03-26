@@ -8,6 +8,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\RepairmentController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ShoppingCartProductController;
 use App\Http\Controllers\UserClientController;
@@ -153,7 +154,7 @@ Route::controller(ProductImageController::class)->prefix('product_image')->group
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-/*
+
 Route::controller(RepairmentController::class)->prefix('repairment')->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
@@ -162,5 +163,5 @@ Route::controller(RepairmentController::class)->prefix('repairment')->group(func
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 });
-*/
+
 

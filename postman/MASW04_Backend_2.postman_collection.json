@@ -2525,12 +2525,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product?offset=0&limit=3",
+							"raw": "{{API}}/repairment?offset=0&limit=3",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product"
+								"repairment"
 							],
 							"query": [
 								{
@@ -2552,12 +2552,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/repairment/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"repairment",
 								"1"
 							]
 						}
@@ -2570,12 +2570,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/repairment/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"repairment",
 								"1"
 							]
 						}
@@ -2595,7 +2595,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"Ordenador HP\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"description\": \"Repared a mouse without cable\",\r\n    \"request_date\": \"2023-03-26 15:52:59\",\r\n    \"repairment_date\": \"2023-03-26 15:52:59\",\r\n    \"price\": \"34.5\",\r\n    \"staff_id\": 1,\r\n    \"client_id\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2603,12 +2603,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/",
+							"raw": "{{API}}/repairment/",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"repairment",
 								""
 							]
 						}
@@ -2628,7 +2628,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 2,\r\n    \"name\": \"Ordenador HP443\",\r\n    \"description\": \"HP-1234SCDS\",\r\n    \"price\": 23.3,\r\n    \"properties\": \"3GB RAM, 1TB SSD\",\r\n    \"stock\": 2\r\n}",
+							"raw": "{\r\n    \"description\": \"Repared a mouse without cable\",\r\n    \"request_date\": \"2023-03-26 15:52:59\",\r\n    \"repairment_date\": \"2023-03-26 15:52:59\",\r\n    \"price\": \"3.5\",\r\n    \"staff_id\": 1,\r\n    \"client_id\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2636,12 +2636,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/repairment/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"repairment",
 								"1"
 							]
 						}
@@ -2661,7 +2661,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": \"a\"\r\n}",
+							"raw": "{\r\n    \"description\": \"Repared a mouse without cable\",\r\n    \"request_date\": \"2023-03-26 12:52:59\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2669,12 +2669,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/product/1",
+							"raw": "{{API}}/repairment/1",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
-								"product",
+								"repairment",
 								"1"
 							]
 						}
