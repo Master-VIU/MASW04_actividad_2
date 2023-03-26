@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestValidateShoppingCart;
 use App\Models\ResultResponse;
 use App\Models\ShoppingCart;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
@@ -11,11 +13,14 @@ class ShoppingCartController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        $cars = ShoppingCart::all();
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $offset = $request->has('offset') ? $request->get('offset') : 0;
+
+        $cars = ShoppingCart::select('*')->orderBy('shopping_cart_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
@@ -28,10 +33,10 @@ class ShoppingCartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateShoppingCart $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(RequestValidateShoppingCart $request): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -55,10 +60,10 @@ class ShoppingCartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
+     * @param $shoppingCartID
+     * @return JsonResponse
      */
-    public function show($shoppingCartID)
+    public function show($shoppingCartID): JsonResponse
     {
         $resultResponse = new ResultResponse();
         try {
@@ -67,7 +72,7 @@ class ShoppingCartController extends Controller
             $resultResponse->setData($cart);
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         } catch (\Exception $e) {
-            $resultResponse->setStatus(ResultResponse::NOT_FOUND);            
+            $resultResponse->setStatus(ResultResponse::NOT_FOUND);
             $resultResponse->setData($e->getMessage());
 
         }
@@ -77,12 +82,13 @@ class ShoppingCartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
+     * @param RequestValidateShoppingCart $request
+     * @param $shoppingCartID
+     * @return JsonResponse
      */
-    public function update(Request $request, $shoppingCartID)
+    public function update(RequestValidateShoppingCart $request, $shoppingCartID): JsonResponse
     {
+        $validated = $request->validated();
         $resultResponse = new ResultResponse();
 
         try {
@@ -105,10 +111,10 @@ class ShoppingCartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
+     * @param $shoppingCartID
+     * @return JsonResponse
      */
-    public function destroy($shoppingCartID)
+    public function destroy($shoppingCartID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
@@ -117,7 +123,7 @@ class ShoppingCartController extends Controller
             $cart = ShoppingCart::findOrFail($shoppingCartID);
             $cart->delete();
 
-            $resultResponse->setData($cart);
+            $resultResponse->setData("Cart with id=".$shoppingCartID." has been removed.");
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         }catch (\Exception $e) {
             $resultResponse->setStatus(ResultResponse::NOT_FOUND);

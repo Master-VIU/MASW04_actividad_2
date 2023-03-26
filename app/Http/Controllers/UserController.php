@@ -17,12 +17,12 @@ class UserController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $limit = $request->has('limit') ? $request->get('limit') : 10;
         $offset = $request->has('offset') ? $request->get('offset') : 0;
 
-        $users = User::select('*')->offset($offset * $limit)->limit($limit)->get();
+        $users = User::select('*')->orderBy('user_id', 'asc')->offset($offset * $limit)->limit($limit)->get();
 
         $resultResponse = new ResultResponse();
 
@@ -61,7 +61,12 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
-
+    /**
+     * Display the specified resource.
+     *
+     * @param $userID
+     * @return JsonResponse
+     */
     public function show($userID): JsonResponse
     {
         $resultResponse = new ResultResponse();
@@ -107,6 +112,13 @@ class UserController extends Controller
         return response()->json($resultResponse);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $userID
+     * @return JsonResponse
+     */
     public function put(Request $request, $userID): JsonResponse
     {
         $resultResponse = new ResultResponse();
@@ -136,16 +148,16 @@ class UserController extends Controller
      * @param $userID
      * @return JsonResponse
      */
-    public function destroy($userID)
+    public function destroy($userID): JsonResponse
     {
         $resultResponse = new ResultResponse();
 
         try{
 
             $user = User::findOrFail($userID);
-            $user->delete();
+            $user->softDelete();
 
-            $resultResponse->setData($user);
+            $resultResponse->setData("User with id=".$userID." has been removed.");
             $resultResponse->setStatus(ResultResponse::SUCCESS);
         }
         catch (\Exception $e) {
